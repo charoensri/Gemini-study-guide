@@ -35,9 +35,13 @@ const Quiz: React.FC<QuizProps> = ({ quiz }) => {
           <p>{currentQuestion.question}</p>
           <ul>
             {currentQuestion.options.map((option, index) => (
-              <li key={index} onClick={() => handleAnswerSelection(option)}>
-                {option}
-              </li>
+              <li
+  key={index}
+  className={selectedAnswer === option ? 'selected' : ''}
+  onClick={() => handleAnswerSelection(option)}
+>
+  {option}
+</li>
             ))}
           </ul>
           {showFeedback && (
