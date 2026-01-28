@@ -6,9 +6,10 @@ interface QuizProps {
     options: string[];
     correctAnswer: string;
   }>;
+  onQuit: () => void;
 }
 
-const Quiz: React.FC<QuizProps> = ({ quiz }) => {
+const Quiz: React.FC<QuizProps> = ({ quiz, onQuit }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -36,12 +37,12 @@ const Quiz: React.FC<QuizProps> = ({ quiz }) => {
           <ul>
             {currentQuestion.options.map((option, index) => (
               <li
-  key={index}
-  className={selectedAnswer === option ? 'selected' : ''}
-  onClick={() => handleAnswerSelection(option)}
->
-  {option}
-</li>
+                key={index}
+                className={selectedAnswer === option ? 'selected' : ''}
+                onClick={() => handleAnswerSelection(option)}
+              >
+                {option}
+              </li>
             ))}
           </ul>
           {showFeedback && (
@@ -56,6 +57,7 @@ const Quiz: React.FC<QuizProps> = ({ quiz }) => {
               ) : (
                 <p>You have completed the quiz!</p>
               )}
+              <button onClick={onQuit}>Quit</button>
             </div>
           )}
         </div>
